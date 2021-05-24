@@ -57,7 +57,7 @@ class VirtManager < Formula
   end
 
   # virt-manager doesn't prompt for password on macOS unless --no-fork flag is provided
-  patch :DATA
+  # patch :DATA
 
   def install
     venv = virtualenv_create(libexec, "python3")
@@ -93,18 +93,3 @@ class VirtManager < Formula
     system "#{bin}/virt-manager", "--version"
   end
 end
-__END__
-diff --git a/virt-manager b/virt-manager
-index 15d5109..8ee305a 100755
---- a/virt-manager
-+++ b/virt-manager
-@@ -151,7 +151,8 @@ def parse_commandline():
-         help="Print debug output to stdout (implies --no-fork)",
-         default=False)
-     parser.add_argument("--no-fork", action="store_true",
--        help="Don't fork into background on startup")
-+        help="Don't fork into background on startup",
-+        default=True)
-
-     parser.add_argument("--show-domain-creator", action="store_true",
-         help="Show 'New VM' wizard")
